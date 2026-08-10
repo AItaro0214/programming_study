@@ -31,7 +31,7 @@ function renderBlock(b, col, soft, hl) {
     </div>`;
   }
   if (b.note) {
-    return `<div style="background:${soft};border-radius:14px;padding:13px 15px;font-size:14.5px;font-weight:700;line-height:1.75;color:oklch(0.30 0.03 280);text-align:center">${T(b.text)}</div>`;
+    return `<div style="background:${soft};border-radius:14px;padding:13px 15px;font-size:14.5px;font-weight:700;line-height:1.75;color:oklch(0.30 0.03 280);text-align:center;white-space:pre-line">${T(b.text)}</div>`;
   }
   if (b.code) {
     return `<div style="display:flex;flex-direction:column;gap:5px">

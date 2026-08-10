@@ -138,7 +138,7 @@ function c1() {
             ['グループ化する', 'group', '共通条件でまとめる'],
             ['集計する', 'aggregate, sum, count', '合計・件数などを出す'],
             ['保存する', 'save, persist, write', 'DBやファイルに残す'],
-            ['表示する', 'print, log, show, render', '画面やログに出す'],
+            ['表示する', 'print, log, show, render', 'print / log はコンソールへ、show / render は実画面へ。出力先が別物'],
             ['送信する', 'send, post, emit', '外部へ送る'],
             ['受信する', 'receive, listen, subscribe', '外部から受け取る'],
             ['接続する', 'connect', 'DBやサーバーにつなぐ'],
@@ -164,7 +164,7 @@ function c1() {
           CARDS([
             ['作る', 'new, create'], ['取得する', 'getName(), findById()'], ['設定する', 'setName()'],
             ['更新する', 'updateUser()'], ['保存する', 'save()'], ['削除する', 'delete()'],
-            ['検証する', 'validate()'], ['判定する', 'isAdult(), hasRole()'], ['表示する', 'System.out.println()'],
+            ['検証する', 'validate()'], ['判定する', 'isAdult(), hasRole()'], ['コンソールに出す', 'System.out.println()', 'ターミナルに出る。ユーザーの画面ではない'],
             ['例外を投げる', 'throw new Exception()'], ['例外を捕まえる', 'try, catch']
           ]),
           P('Javaではこういう名前が多いです。'),
@@ -175,7 +175,9 @@ function c1() {
           H('JavaScript'),
           P('JavaScriptは、Web画面・イベント・非同期処理に強い言語です。'),
           CARDS([
-            ['表示する', 'console.log()'], ['取得する', 'fetch()'], ['変換する', 'map()'],
+            ['コンソールに出す', 'console.log()', '開発者ツールに出る。ユーザーの画面には出ない'],
+            ['実画面に出す', 'textContent, innerHTML', 'ページそのものを書き換える。ユーザーに見える'],
+            ['取得する', 'fetch()'], ['変換する', 'map()'],
             ['絞り込む', 'filter()'], ['探す', 'find()'], ['追加する', 'push()'],
             ['削除する', 'splice(), delete'], ['文字列化する', 'JSON.stringify()'], ['解析する', 'JSON.parse()'],
             ['クリックに反応する', 'addEventListener()'], ['非同期で待つ', 'await']
@@ -190,7 +192,7 @@ function c1() {
           CARDS([
             ['ファイルを読む', 'fs.readFile()'], ['ファイルに書く', 'fs.writeFile()'], ['パスを扱う', 'path.join()'],
             ['HTTPサーバーを作る', 'http.createServer()'], ['APIを作る', 'app.get(), app.post()'], ['環境変数を読む', 'process.env'],
-            ['モジュールを読む', 'require(), import'], ['外部に公開する', 'module.exports, export'], ['ログを出す', 'console.log()'],
+            ['モジュールを読む', 'require(), import'], ['外部に公開する', 'module.exports, export'], ['ログを出す', 'console.log()', 'ターミナルに出る。サーバー側なので画面はない'],
             ['非同期で待つ', 'async, await']
           ]),
           P('Node.jsだと、たとえばこうです。'),
@@ -203,7 +205,7 @@ function c1() {
           H('Python'),
           P('Pythonは、読みやすく、データ処理・自動化・AI・スクリプトに強い言語です。'),
           CARDS([
-            ['表示する', 'print()'], ['入力する', 'input()'], ['長さを調べる', 'len()'],
+            ['コンソールに出す', 'print()', 'ターミナルに出る。ユーザーの画面ではない'], ['入力する', 'input()'], ['長さを調べる', 'len()'],
             ['型を変える', 'int(), str(), float()'], ['追加する', 'append()'], ['削除する', 'remove(), pop()'],
             ['並べ替える', 'sort(), sorted()'], ['開く', 'open()'], ['読む', 'read()'], ['書く', 'write()'],
             ['例外を投げる', 'raise'], ['例外を捕まえる', 'try, except'], ['関数を作る', 'def'], ['クラスを作る', 'class']
@@ -213,6 +215,48 @@ function c1() {
           P('意味は、'),
           LIST(['users の中から', 'age が18以上の user だけを集めて', 'adults に入れる']),
           P('Pythonは、データを読む、加工する、出力する流れが短く書けます。')
+        ]},
+        { t: '「表示する」の出力先 — コンソールと実画面は別物', b: [
+          P('「表示する」には行き先が2つあります。ここを混ぜると「ちゃんと動いてるのに画面に何も出ない」で必ずハマります。'),
+          NOTE('コンソール ＝ 開発者だけが見る裏側\n実画面（UI）＝ ユーザーが実際に見るところ'),
+          CARDS([
+            ['コンソール出力', 'console.log() / print() / System.out.println()', '開発者ツールやターミナルに出る。ユーザーには見えない。動作確認・デバッグ用'],
+            ['実画面（UI）出力', 'textContent / innerHTML / render()', 'ページやアプリの画面そのものに出る。ユーザーが見るのはこっち']
+          ]),
+          H('JavaScript（ブラウザ）で見ると'),
+          ROWS(['書き方', '出る場所', '見る人'], [
+            ['コンソールに出す', '', 'console.log("Hello");', 'F12 → Console タブ', '開発者だけ'],
+            ['実画面に出す', '', 'document.getElementById("out").textContent = "Hello";', 'ページ上のその要素', 'ユーザー'],
+            ['ダイアログで出す', '', 'alert("Hello");', '画面中央のポップアップ', 'ユーザー']
+          ]),
+          P('実画面に出すには、HTML側に「置き場所」が要ります。'),
+          CODE('HTML', '<p id="out"></p>'),
+          CODE('JAVASCRIPT', '// コンソールにしか出ない（ユーザーには見えない）\nconsole.log("Hello");\n\n// 実画面に出る（ユーザーに見える）\ndocument.getElementById("out").textContent = "Hello";'),
+          H('実画面に書くための言葉'),
+          GLOSS([
+            ['document', '今開いているページ全体を表すオブジェクト'],
+            ['getElementById', 'id を手がかりに、ページ上の要素を1つ取ってくる'],
+            ['querySelector', 'CSSと同じ書き方で要素を探す。document.querySelector(".box")'],
+            ['textContent', '要素の中身を「ただの文字」として入れ替える。安全なのでまずこれ'],
+            ['innerHTML', '要素の中身を「HTML」として入れ替える。タグが効く反面、外から来た文字をそのまま入れると危険'],
+            ['createElement', '新しい要素を作る'],
+            ['appendChild', '作った要素をページにぶら下げて、実際に見えるようにする'],
+            ['alert', 'ポップアップを出す。手軽だが操作を止めるので実務ではあまり使わない'],
+            ['render', '画面を描画する。React などのフレームワークで使う言葉']
+          ]),
+          H('言語ごとの出力先'),
+          ROWS(['コンソール / ターミナル', '実画面（UI）'], [
+            ['JavaScript', 'ブラウザ', 'console.log()', 'textContent, innerHTML, appendChild'],
+            ['Node.js', 'サーバー', 'console.log()', '自分では画面を持たない。HTMLやJSONを返してブラウザに描かせる'],
+            ['Java', '', 'System.out.println()', 'Swing / JavaFX、Webなら画面用テンプレート'],
+            ['Python', '', 'print()', 'Tkinter / PyQt、Webなら Django・Flask のテンプレート']
+          ]),
+          P('Node.js・Java・Python のサーバー側は、そもそも自分で画面を持ちません。データやHTMLを返して、それをブラウザが描きます。'),
+          H('開発者向けの流れ'),
+          FLOW(['サーバーやJSで print / log', 'ターミナル・コンソールに出る', '開発者が確認する']),
+          H('ユーザー向けの流れ'),
+          FLOW(['HTML・JSONを返す / 要素を書き換える', 'ブラウザが受け取る', '実画面に描かれる', 'ユーザーが見る']),
+          NOTE('print も console.log も「ユーザーに見せる手段」ではない。\n見せたいなら、画面の要素を書き換えるか、画面用のHTMLを返す。')
         ]},
         { t: '予約語・型・関数・メソッド・APIの違い', b: [
           P('ここを分けると混乱しにくいです。'),
@@ -1024,12 +1068,20 @@ function c3() {
             ['JavaScript', '', 'let age = 20;', '内部的には主に Number'],
             ['Python', '', 'age = 20', '値が int 型になる']
           ]),
-          H('「表示する」'),
+          H('「表示する」（コンソールへ）'),
+          P('下の4つはすべて、開発者が見るコンソール・ターミナルへの出力です。ユーザーの画面には出ません。'),
           ROWS(['書き方', '分解'], [
             ['Java', '', 'System.out.println("Hi");', 'System → out → println'],
             ['JavaScript', '', 'console.log("Hi");', 'console → log'],
             ['Node.js', '', 'console.log("Hi");', 'JavaScriptと同じ'],
             ['Python', '', 'print("Hi")', 'print 関数']
+          ]),
+          H('「表示する」（実画面へ）'),
+          P('ユーザーに見せたいときは、こちらです。'),
+          ROWS(['書き方', '分解'], [
+            ['JavaScript', 'ブラウザ', 'el.textContent = "Hi";', '要素の中身を文字として差し替える'],
+            ['JavaScript', 'ブラウザ', 'el.innerHTML = "<b>Hi</b>";', 'HTMLとして差し替える。外部の文字はそのまま入れない'],
+            ['React', '', 'return <p>Hi</p>;', '返した内容がそのまま画面になる']
           ])
         ]},
         { t: '代表的な数の感覚', b: [
