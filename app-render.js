@@ -215,7 +215,7 @@ function renderApp(vals) {
         ${vals.sections.map(s => renderSection(s, vals.col, vals.soft, state.hl)).join('')}
       </div>
 
-      <div style="padding:26px 0 10px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:oklch(0.65 0.02 280)">${vals.chapNo} / 04 — END</div>
+      <div style="padding:26px 0 10px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:oklch(0.65 0.02 280)">${vals.chapNo} / ${vals.chapTotal} — END</div>
     </div>
   </div>
 

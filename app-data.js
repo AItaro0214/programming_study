@@ -28,7 +28,7 @@ function isOpen(k) {
 }
 
 function chapters() {
-  return [c1(), c2(), c3(), c4()];
+  return [c1(), c2(), c3(), c4(), c5(), c6(), c7(), c8(), c9()];
 }
 
 function renderVals() {
@@ -70,7 +70,8 @@ function renderVals() {
   return {
     tabs, sections,
     col: ch.col, soft: ch.soft,
-    chapNo: '0' + (ci + 1),
+    chapNo: String(ci + 1).padStart(2, '0'),
+    chapTotal: String(chaps.length).padStart(2, '0'),
     chapTitle: ch.title,
     chapDesc: ch.desc,
     openAllFn: setAll(true),
