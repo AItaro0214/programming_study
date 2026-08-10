@@ -1,0 +1,63 @@
+html, body {
+  margin: 0;
+  background: oklch(0.975 0.012 85);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+a {
+  color: oklch(0.55 0.16 255);
+  text-decoration: none;
+}
+a:hover {
+  color: oklch(0.45 0.16 255);
+}
+
+::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+#app {
+  font-family: 'Zen Maru Gothic', system-ui, sans-serif;
+  color: oklch(0.26 0.02 280);
+  background: oklch(0.975 0.012 85);
+  min-height: 100%;
+  padding-bottom: 80px;
+}
+
+.sc-active-btn:active {
+  transform: scale(0.94);
+}
+.sc-totop:active {
+  transform: scale(0.9);
+}
+
+.sc-dash {
+  animation: dash 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.96) translateY(8px); }
+  60% { transform: scale(1.01); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes dash {
+  from { opacity: .25; }
+  to { opacity: 1; }
+}
