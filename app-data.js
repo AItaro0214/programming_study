@@ -232,9 +232,17 @@ function c1() {
           P('実画面に出すには、HTML側に「置き場所」が要ります。'),
           CODE('HTML', '<p id="out"></p>'),
           CODE('JAVASCRIPT', '// コンソールにしか出ない（ユーザーには見えない）\nconsole.log("Hello");\n\n// 実画面に出る（ユーザーに見える）\ndocument.getElementById("out").textContent = "Hello";'),
+          H('置き場所を作らずに出すなら'),
+          P('HTMLに <p id="out"></p> を用意するのが面倒なら、body に直接入れても画面には出ます。ただし body の中身が丸ごと消えます。'),
+          ROWS(['書き方', 'どうなるか'], [
+            ['一部だけ変える', '', 'document.getElementById("out").textContent = "Hello";', '見出しやボタンはそのまま残り、指定した要素だけ変わる'],
+            ['body ごと変える', '', 'document.body.textContent = "Hello";', 'ページの中身が全部消えて「Hello」だけになる']
+          ]),
+          NOTE('document.body.textContent は動作確認には手軽。\nただしページの中身を全部消すので、実際のアプリでは要素を指定して書き換える。'),
           H('実画面に書くための言葉'),
           GLOSS([
             ['document', '今開いているページ全体を表すオブジェクト'],
+            ['document.body', 'ページの<body>そのもの。ここに入れると画面全体が対象になる'],
             ['getElementById', 'id を手がかりに、ページ上の要素を1つ取ってくる'],
             ['querySelector', 'CSSと同じ書き方で要素を探す。document.querySelector(".box")'],
             ['textContent', '要素の中身を「ただの文字」として入れ替える。安全なのでまずこれ'],
