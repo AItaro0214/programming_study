@@ -40,6 +40,36 @@ a:hover {
   animation: dash 1.6s ease-in-out infinite alternate;
 }
 
+.sc-hl {
+  background: oklch(0.90 0.15 95);
+  color: oklch(0.24 0.02 280);
+  border-radius: 4px;
+  padding: 0 2px;
+  font-weight: 700;
+}
+
+.sc-result:hover {
+  border-color: oklch(0.80 0.03 85);
+}
+
+.sc-flash {
+  animation: flash 1.2s ease;
+}
+
+/* 検索欄の×印(iOS Safari の既定の消去ボタン)は自前のボタンと重なるので隠す */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@keyframes flash {
+  0% { box-shadow: 0 0 0 0 oklch(0.75 0.16 95 / 0.85); }
+  100% { box-shadow: 0 0 0 12px oklch(0.75 0.16 95 / 0); }
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }

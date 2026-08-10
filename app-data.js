@@ -12,7 +12,7 @@ const STEPS = (items) => ({ steps2: 1, items: items.map((r, i) => ({ i: String(i
 const PAIRS = (items) => ({ pairs: 1, items: items.map(r => ({ a: r[0], b: r[1] })) });
 const GLOSS = (items) => ({ gloss: 1, items: items.map(r => ({ w: r[0], m: r[1] })) });
 
-let state = { chap: null, open: {} };
+let state = { chap: null, open: {}, q: '', hl: '', scrollKey: null };
 let startChapter = '1';
 let listeners = [];
 function setState(update) {
