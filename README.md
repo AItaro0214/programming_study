@@ -1,6 +1,6 @@
 # programming_study
 
-スマホで読みやすいプログラミング用語カンペ。全12章・129セクションを、一語ずつ意味付きでまとめたチートシートです。
+スマホで読みやすいプログラミング用語カンペ。全14章・138セクションを、一語ずつ意味付きでまとめたチートシートです。
 
 Java / JavaScript / TypeScript / Python / Dart(Flutter) / Swift / Kotlin / C / C++ / SQL・NoSQL、および各言語の主要フレームワーク(React・Next.js / Flask・Django・FastAPI / Spring Boot・Quarkus・Micronaut)を扱っています。
 
@@ -17,9 +17,10 @@ Java / JavaScript / TypeScript / Python / Dart(Flutter) / Swift / Kotlin / C / C
 
 - `index.html` — ページ本体
 - `style.css` — 共通スタイル・アニメーション・表示幅の定義
-- `app-data.js` — 状態管理と①〜④章の本文(言語の地図 / 動詞大全 / 単語の正体 / SQL・NoSQL)
-- `app-langs.js` — ⑤〜⑨章(TypeScript / モバイル3種 / C・C++ / 依存とパッケージ / 基本文法早見)
-- `app-frameworks.js` — ⑩〜⑫章(React・Next.js / Flask・Django・FastAPI / Spring・Quarkus)
+- `app-data.js` — 状態管理と、素材になる本文(言語の地図 / 動詞大全 / 単語の正体 / SQL・NoSQL)
+- `app-chapters.js` — 章の組み替え(概念章の①と、言語別の Java / JavaScript・Node.js / Python を素材から構成)
+- `app-langs.js` — TypeScript / モバイル3種 / C・C++ / 依存とパッケージ / 基本文法早見
+- `app-frameworks.js` — React・Next.js / Flask・Django・FastAPI / Spring・Quarkus
 - `app-search.js` — 全文検索インデックス
 - `app-render.js` — レンダリングと操作(タブ切り替え・アコーディオン・検索ジャンプ・表示幅切り替え)
 

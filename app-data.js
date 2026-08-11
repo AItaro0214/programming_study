@@ -28,8 +28,31 @@ function isOpen(k) {
   return v === undefined ? !!state.wide : v;
 }
 
+// タブの丸数字は並び順から自動で付ける（章を入れ替えても番号がずれない）
+const CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳'.split('');
+
+function chapterNo(i) {
+  return CIRCLED[i] || String(i + 1);
+}
+
+// 概念 → 言語別 → 横断 → フレームワーク → DB の順に並べる
 function chapters() {
-  return [c1(), c2(), c3(), c4(), c5(), c6(), c7(), c8(), c9(), c10(), c11(), c12()];
+  return [
+    chMap(),        // ① 言語の地図（概念）
+    c2(),           // ② 動詞大全
+    chJava(),       // ③ Java
+    chJs(),         // ④ JavaScript / Node.js
+    c5(),           // ⑤ TypeScript
+    chPython(),     // ⑥ Python
+    c6(),           // ⑦ モバイル3種
+    c7(),           // ⑧ C / C++
+    c8(),           // ⑨ 依存とパッケージ
+    c9(),           // ⑩ 基本文法早見
+    c10(),          // ⑪ React / Next.js
+    c11(),          // ⑫ Flask / Django / FastAPI
+    c12(),          // ⑬ Spring / Quarkus
+    c4()            // ⑭ SQL / NoSQL
+  ];
 }
 
 function renderVals() {
@@ -39,7 +62,7 @@ function renderVals() {
   const ch = chaps[ci];
 
   const tabs = chaps.map((c, i) => ({
-    label: c.tab,
+    label: chapterNo(i) + ' ' + c.tab,
     go: () => { setState({ chap: i }); if (typeof window !== 'undefined') window.scrollTo({ top: 0 }); },
     bg: i === ci ? c.col : '#fff',
     fg: i === ci ? '#fff' : 'oklch(0.42 0.02 280)',
@@ -81,10 +104,10 @@ function renderVals() {
   };
 }
 
-function c1() {
+function srcMap() {
     const langCells = ['Java', 'JS / Node', 'Python'];
     return {
-      tab: '① 言語の地図', col: 'oklch(0.55 0.17 255)', soft: 'oklch(0.94 0.035 255)',
+      tab: '言語の地図', col: 'oklch(0.55 0.17 255)', soft: 'oklch(0.94 0.035 255)',
       title: '4言語をまたぐ用語マップ',
       desc: 'Java / JavaScript / Node.js / Python。同じ意味の言葉が、言語ごとにどう姿を変えるか。',
       sections: [
@@ -437,7 +460,7 @@ function c1() {
 
 function c2() {
     return {
-      tab: '② 動詞大全', col: 'oklch(0.60 0.19 22)', soft: 'oklch(0.94 0.035 22)',
+      tab: '動詞大全', col: 'oklch(0.60 0.19 22)', soft: 'oklch(0.94 0.035 22)',
       title: '実務で使う動詞、ぜんぶ',
       desc: 'プログラミングは突き詰めると「データに対して何かをする動詞の集まり」です。15分類 + 実務頻出リスト。',
       sections: [
@@ -728,9 +751,9 @@ function c2() {
     };
   }
 
-function c3() {
+function srcWords() {
     return {
-      tab: '③ 単語の正体', col: 'oklch(0.55 0.18 305)', soft: 'oklch(0.94 0.035 305)',
+      tab: '単語の正体', col: 'oklch(0.55 0.18 305)', soft: 'oklch(0.94 0.035 305)',
       title: 'String / print / def の正体',
       desc: '全部「意味のある単語」ですが、同じ種類の単語ではありません。予約語・型・関数・API・自分で決めた名前を分けて見る。',
       sections: [
@@ -1171,7 +1194,7 @@ function c3() {
 
 function c4() {
     return {
-      tab: '④ SQL / NoSQL', col: 'oklch(0.50 0.13 160)', soft: 'oklch(0.93 0.04 160)',
+      tab: 'SQL / NoSQL', col: 'oklch(0.50 0.13 160)', soft: 'oklch(0.93 0.04 160)',
       title: 'データベースも名詞と動詞',
       desc: '「名詞＝データの構造」「動詞＝データに対する操作」「文法＝条件や並べ方」で見るとかなり理解しやすい。',
       sections: [

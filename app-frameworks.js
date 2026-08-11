@@ -2,7 +2,7 @@
 
 function c10() {
   return {
-    tab: '⑩ React / Next.js', col: 'oklch(0.62 0.16 210)', soft: 'oklch(0.94 0.04 210)',
+    tab: 'React / Next.js', col: 'oklch(0.62 0.16 210)', soft: 'oklch(0.94 0.04 210)',
     title: 'JavaScript のフレームワーク',
     desc: 'Reactで画面を部品に分け、Next.jsがページ・ルーティング・サーバー処理まで面倒を見る。今のWeb開発の主流。',
     sections: [
@@ -25,7 +25,7 @@ function c10() {
         H('中の状態を持つ — state'),
         CODE('REACT', 'import { useState } from "react";\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count} 回\n    </button>\n  );\n}'),
         NOTE('画面を直接書き換えない。\nstateを変えると、Reactが画面を作り直す。'),
-        P('⑥章のFlutter・SwiftUI・Composeと同じ「宣言的UI」の発想です。実際、SwiftUIやComposeはReactの影響を受けています。')
+        P('⑦章のFlutter・SwiftUI・Composeと同じ「宣言的UI」の発想です。実際、SwiftUIやComposeはReactの影響を受けています。')
       ]},
       { t: 'React の基本用語', b: [
         GLOSS([
@@ -106,7 +106,7 @@ function c10() {
           ['TanStack Query', 'サーバーから取ったデータの取得・キャッシュ管理'],
           ['Prisma / Drizzle', 'TypeScriptからDBを型付きで扱うORM'],
           ['Vercel', 'Next.jsを作った会社のホスティングサービス'],
-          ['React Native', 'Reactの書き方でスマホアプリを作る。⑥章のFlutterの対抗馬']
+          ['React Native', 'Reactの書き方でスマホアプリを作る。⑦章のFlutterの対抗馬']
         ]),
         NOTE('学ぶ順は JavaScript → React → Next.js。\n飛ばすと、どこまでがReactの話か分からなくなる。')
       ]}
@@ -116,7 +116,7 @@ function c10() {
 
 function c11() {
   return {
-    tab: '⑪ Flask / Django / FastAPI', col: 'oklch(0.58 0.13 95)', soft: 'oklch(0.94 0.05 95)',
+    tab: 'Flask / Django / FastAPI', col: 'oklch(0.58 0.13 95)', soft: 'oklch(0.94 0.05 95)',
     title: 'Python のフレームワーク',
     desc: '小さく始めるFlask、全部入りのDjango、型と速さのFastAPI。同じAPIを3つで書き比べる。',
     sections: [
@@ -212,7 +212,7 @@ function c11() {
 
 function c12() {
   return {
-    tab: '⑫ Spring / Quarkus', col: 'oklch(0.46 0.14 35)', soft: 'oklch(0.93 0.045 35)',
+    tab: 'Spring / Quarkus', col: 'oklch(0.46 0.14 35)', soft: 'oklch(0.93 0.045 35)',
     title: 'Java のフレームワーク',
     desc: '業務システムの定番Spring Boot、起動が速い新世代のQuarkusとMicronaut。共通するのはDIという考え方。',
     sections: [
@@ -231,7 +231,7 @@ function c12() {
       { t: 'Spring Boot — 最小のAPI', b: [
         CODE('JAVA', 'import org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.web.bind.annotation.*;\n\n@SpringBootApplication\npublic class App {\n    public static void main(String[] args) {\n        SpringApplication.run(App.class, args);\n    }\n}\n\n@RestController\nclass UserController {\n\n    @GetMapping("/users/{id}")\n    public String getUser(@PathVariable String id) {\n        return "user " + id;\n    }\n\n    @PostMapping("/users")\n    public String create(@RequestBody User user) {\n        return "created " + user.getName();\n    }\n}'),
         MONO('@SpringBootApplication → ここがアプリの起点\n@RestController        → JSONを返す係\n@GetMapping("/users")  → GETでこのURLが来たら呼ぶ\n@PathVariable          → URLの可変部分を受け取る\n@RequestBody           → 送られてきたJSONをオブジェクトに変換'),
-        P('@ で始まるものをアノテーションと呼びます。⑪章のPythonのデコレータと同じ役割で、「この部品はこういう役目」と印を付けています。')
+        P('@ で始まるものをアノテーションと呼びます。⑫章のPythonのデコレータと同じ役割で、「この部品はこういう役目」と印を付けています。')
       ]},
       { t: 'DI — 4つに共通する中心的な考え方', b: [
         P('DI（依存性注入）は、必要な部品を自分で作らず、外から渡してもらう設計です。Javaのフレームワークはこれが中心にあります。'),
@@ -262,7 +262,7 @@ function c12() {
           ['Micronaut', '', 'コンパイル時', '非常に速い', 'リフレクションを使わない設計。省メモリ']
         ]),
         H('ネイティブイメージ'),
-        P('QuarkusとMicronautは、GraalVMを使ってJavaコードを機械語の実行ファイルに変換できます。⑦章のC/C++に近い形になり、起動がミリ秒単位になります。'),
+        P('QuarkusとMicronautは、GraalVMを使ってJavaコードを機械語の実行ファイルに変換できます。⑧章のC/C++に近い形になり、起動がミリ秒単位になります。'),
         FLOW(['Javaコード', 'GraalVM native-image', '実行ファイル（JVM不要）', 'ミリ秒で起動']),
         CARDS([
           ['向く場面', 'サーバーレス', '呼ばれるたびに起動する。起動の速さが直接コストになる'],
@@ -291,7 +291,7 @@ function c12() {
           ['JPA / Hibernate', 'JavaのORM。クラスと表を対応づける'],
           ['Spring Data JPA', 'メソッド名を書くだけでSQLが作られる仕組み'],
           ['application.yml', '設定ファイル。DB接続先やポート番号'],
-          ['Maven / Gradle', 'ビルドと依存管理（⑧章）'],
+          ['Maven / Gradle', 'ビルドと依存管理（⑨章）'],
           ['Spring Initializr', '雛形を作る公式サイト。start.spring.io'],
           ['Actuator', '死活監視やメトリクスを出す機能'],
           ['GraalVM', 'Javaを機械語にする仕組み。ネイティブ化の土台'],

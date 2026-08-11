@@ -28,7 +28,7 @@ function buildIndex() {
       out.push({
         ci, si,
         key: ci + ':' + si,
-        chapTab: ch.tab,
+        chapTab: chapterNo(ci) + ' ' + ch.tab,
         col: ch.col,
         soft: ch.soft,
         secTitle: s.t,

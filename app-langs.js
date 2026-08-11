@@ -2,7 +2,7 @@
 
 function c5() {
   return {
-    tab: '⑤ TypeScript', col: 'oklch(0.52 0.12 195)', soft: 'oklch(0.93 0.04 195)',
+    tab: 'TypeScript', col: 'oklch(0.52 0.12 195)', soft: 'oklch(0.93 0.04 195)',
     title: 'TypeScript — JavaScriptに型をつける',
     desc: '書き方はJavaScriptのまま、Javaのような型チェックを足した言語。どこがJS寄りで、どこがJava寄りか。',
     sections: [
@@ -146,7 +146,7 @@ function c5() {
 
 function c6() {
   return {
-    tab: '⑥ モバイル3種', col: 'oklch(0.60 0.16 55)', soft: 'oklch(0.94 0.045 55)',
+    tab: 'モバイル3種', col: 'oklch(0.60 0.16 55)', soft: 'oklch(0.94 0.045 55)',
     title: 'Flutter / Swift / Kotlin',
     desc: 'スマホアプリの3択。Dart（Flutter）は両OS対応、SwiftはiOS純正、KotlinはAndroid純正。書き方は驚くほど似ている。',
     sections: [
@@ -275,7 +275,7 @@ function c6() {
 
 function c7() {
   return {
-    tab: '⑦ C / C++', col: 'oklch(0.45 0.055 285)', soft: 'oklch(0.93 0.02 285)',
+    tab: 'C / C++', col: 'oklch(0.45 0.055 285)', soft: 'oklch(0.93 0.02 285)',
     title: 'C / C++ — 機械に一番近い言葉',
     desc: 'OS・組込み・ゲーム・高速処理の土台。他の言語が自動でやってくれることを、自分で書く必要がある。',
     sections: [
@@ -438,7 +438,7 @@ function c7() {
 
 function c8() {
   return {
-    tab: '⑧ 依存とパッケージ', col: 'oklch(0.55 0.16 345)', soft: 'oklch(0.94 0.04 345)',
+    tab: '依存とパッケージ', col: 'oklch(0.55 0.16 345)', soft: 'oklch(0.94 0.04 345)',
     title: '依存関係・パッケージ・モジュール',
     desc: '他人が書いたコードを、自分のコードから呼ぶ仕組み。言葉の整理と、各言語での「入れ方」「使い方」。',
     sections: [
@@ -540,10 +540,51 @@ function c8() {
 
 function c9() {
   return {
-    tab: '⑨ 基本文法早見', col: 'oklch(0.52 0.13 120)', soft: 'oklch(0.94 0.04 120)',
+    tab: '基本文法早見', col: 'oklch(0.52 0.13 120)', soft: 'oklch(0.94 0.04 120)',
     title: '全言語 基本文法 早見',
     desc: 'Java / JavaScript / TypeScript / Python / Dart / Swift / Kotlin / C / C++ を、同じお題で並べて比較。',
     sections: [
+      { t: 'ひとつなぎの例文 — 6つの手順', b: [
+        P('ここから3つのセクションは、全言語まったく同じ動きをする小さなプログラムです。バラバラの文法ではなく、実際に動く1本のコードとして並べています。'),
+        P('どれも次の6手順で、同じ順番に並んでいます。'),
+        STEPS([
+          ['import / #include', '依存を読み込む', '外部の機能を持ってくる。ここが無いと標準機能以外は使えない'],
+          ['users = [...]', '変数を作る', 'データを用意する。この例では2人分のユーザー'],
+          ['isAdult(...)', '関数を作る', '「18歳以上か」を判定する処理に名前を付ける'],
+          ['filter / where', '条件で絞る', '作った関数を使って、条件に合うものだけ残す'],
+          ['if / else', '条件で分ける', '結果によって処理を変える'],
+          ['print / println', '実行して出す', '呼び出して、結果をコンソールへ']
+        ]),
+        NOTE('やることは全言語同じ。\n違うのは書き方だけ、というのが見て分かる。'),
+        H('Java'),
+        CODE('JAVA', 'import java.time.LocalDate;\nimport java.util.List;\n\npublic class Main {\n    record User(String name, int age) {}\n\n    static boolean isAdult(User u) {\n        return u.age() >= 18;\n    }\n\n    public static void main(String[] args) {\n        List<User> users = List.of(\n            new User("Taro", 20),\n            new User("Hana", 15)\n        );\n\n        long count = users.stream().filter(Main::isAdult).count();\n\n        if (count > 0) {\n            System.out.println(LocalDate.now() + " 成人 " + count + " 人");\n        } else {\n            System.out.println("成人はいません");\n        }\n    }\n}'),
+        H('JavaScript'),
+        CODE('JAVASCRIPT', '// 依存を読み込む（外部パッケージなら "axios" のように書く）\nimport { hostname } from "node:os";\n\nconst users = [\n  { name: "Taro", age: 20 },\n  { name: "Hana", age: 15 },\n];\n\nfunction isAdult(user) {\n  return user.age >= 18;\n}\n\nfunction main() {\n  const count = users.filter(isAdult).length;\n\n  if (count > 0) {\n    console.log(`${hostname()} 成人 ${count} 人`);\n  } else {\n    console.log("成人はいません");\n  }\n}\n\nmain();'),
+        H('TypeScript'),
+        CODE('TYPESCRIPT', 'import { hostname } from "node:os";\n\ninterface User {\n  name: string;\n  age: number;\n}\n\nconst users: User[] = [\n  { name: "Taro", age: 20 },\n  { name: "Hana", age: 15 },\n];\n\nfunction isAdult(user: User): boolean {\n  return user.age >= 18;\n}\n\nfunction main(): void {\n  const count: number = users.filter(isAdult).length;\n\n  if (count > 0) {\n    console.log(`${hostname()} 成人 ${count} 人`);\n  } else {\n    console.log("成人はいません");\n  }\n}\n\nmain();'),
+        NOTE('JavaScript と TypeScript の差は「: 型」だけ。\n流れはまったく同じ。')
+      ]},
+      { t: 'ひとつなぎの例文 — Python / Dart / Swift / Kotlin', b: [
+        H('Python'),
+        CODE('PYTHON', 'from datetime import date\n\nusers = [\n    {"name": "Taro", "age": 20},\n    {"name": "Hana", "age": 15},\n]\n\ndef is_adult(user):\n    return user["age"] >= 18\n\ndef main():\n    count = len([u for u in users if is_adult(u)])\n\n    if count > 0:\n        print(f"{date.today()} 成人 {count} 人")\n    else:\n        print("成人はいません")\n\nif __name__ == "__main__":\n    main()'),
+        H('Dart'),
+        CODE('DART', 'import "dart:io";\n\nclass User {\n  final String name;\n  final int age;\n  User(this.name, this.age);\n}\n\nbool isAdult(User u) => u.age >= 18;\n\nvoid main() {\n  final users = [User("Taro", 20), User("Hana", 15)];\n\n  final count = users.where(isAdult).length;\n\n  if (count > 0) {\n    stdout.writeln("成人 $count 人");\n  } else {\n    stdout.writeln("成人はいません");\n  }\n}'),
+        H('Swift'),
+        CODE('SWIFT', 'import Foundation\n\nstruct User {\n    let name: String\n    let age: Int\n}\n\nfunc isAdult(_ u: User) -> Bool {\n    return u.age >= 18\n}\n\nfunc main() {\n    let users = [\n        User(name: "Taro", age: 20),\n        User(name: "Hana", age: 15)\n    ]\n\n    let count = users.filter(isAdult).count\n\n    if count > 0 {\n        print("成人 \\(count) 人")\n    } else {\n        print("成人はいません")\n    }\n}\n\nmain()'),
+        H('Kotlin'),
+        CODE('KOTLIN', 'import java.time.LocalDate\n\ndata class User(val name: String, val age: Int)\n\nfun isAdult(u: User): Boolean = u.age >= 18\n\nfun main() {\n    val users = listOf(User("Taro", 20), User("Hana", 15))\n\n    val count = users.filter(::isAdult).size\n\n    if (count > 0) {\n        println("${LocalDate.now()} 成人 $count 人")\n    } else {\n        println("成人はいません")\n    }\n}'),
+        NOTE('Kotlin の data class は1行でクラスが終わる。\nJavaの同じクラスと見比べると差が分かる。')
+      ]},
+      { t: 'ひとつなぎの例文 — C / C++', b: [
+        P('CとC++だけは、リストの件数を自分で計算したり、構造体を自分で定義したりと、手数が増えます。⑧章の「他言語より大変なところ」がここに出ています。'),
+        H('C'),
+        CODE('C', '#include <stdio.h>\n#include <stdbool.h>\n\ntypedef struct {\n    char name[32];\n    int age;\n} User;\n\nbool is_adult(User u) {\n    return u.age >= 18;\n}\n\nint main(void) {\n    User users[] = {{"Taro", 20}, {"Hana", 15}};\n    int len = sizeof(users) / sizeof(users[0]);\n\n    int count = 0;\n    for (int i = 0; i < len; i++) {\n        if (is_adult(users[i])) {\n            count++;\n        }\n    }\n\n    if (count > 0) {\n        printf("成人 %d 人\\n", count);\n    } else {\n        printf("成人はいません\\n");\n    }\n    return 0;\n}'),
+        H('C++'),
+        CODE('C++', '#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nstruct User {\n    std::string name;\n    int age;\n};\n\nbool isAdult(const User& u) {\n    return u.age >= 18;\n}\n\nint main() {\n    std::vector<User> users = {{"Taro", 20}, {"Hana", 15}};\n\n    int count = std::count_if(users.begin(), users.end(), isAdult);\n\n    if (count > 0) {\n        std::cout << "成人 " << count << " 人" << std::endl;\n    } else {\n        std::cout << "成人はいません" << std::endl;\n    }\n    return 0;\n}'),
+        NOTE('Cには filter が無いので、for で自分で数える。\nC++は count_if で1行になる。')
+      ]},
+      srcMap().sections[7],     // 同じ処理を言語別に見る（旧①08）
+      srcWords().sections[5],   // 3言語を横並びにするとこう（旧③06）
       { t: 'コメント', b: [
         CODE('コメント', 'Java        // 1行\n            /* 複数行 */\n\nJavaScript  // 1行\n            /* 複数行 */\n\nTypeScript  // 1行\n            /* 複数行 */\n\nPython      # 1行\n            """ 複数行（文字列を流用） """\n\nDart        // 1行\n            /* 複数行 */\n\nSwift       // 1行\n            /* 複数行 */\n\nKotlin      // 1行\n            /* 複数行 */\n\nC           /* 複数行 */\n            // 1行（C99以降）\n\nC++         // 1行\n            /* 複数行 */'),
         NOTE('Pythonだけ # 。\n他は全部 // で揃っている。')
