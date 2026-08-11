@@ -155,7 +155,7 @@ function renderResults(results, term) {
           <span style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:${g.col};color:#fff">${esc(g.chapTab)}</span>
           <span style="height:2px;flex:1;background:${g.col};opacity:.25;border-radius:2px"></span>
         </div>
-        ${g.items.map(r => `
+        <div class="sc-rgrid">${g.items.map(r => `
           <button data-jump-ci="${r.ci}" data-jump-si="${r.si}" class="sc-active-btn sc-result" style="width:100%;text-align:left;display:flex;flex-direction:column;gap:6px;background:#fff;border:2px solid oklch(0.92 0.015 85);border-radius:14px;padding:11px 13px;cursor:pointer;font-family:'Zen Maru Gothic',sans-serif;transition:transform .15s ease,border-color .15s ease">
             <div style="display:flex;align-items:baseline;gap:8px">
               <span style="flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:${g.col};padding-top:2px">${r.n}</span>
@@ -163,7 +163,7 @@ function renderResults(results, term) {
               <span style="flex:0 0 auto;font-size:10px;font-weight:700;color:#fff;background:${g.col};border-radius:999px;padding:2px 7px">${r.hits}</span>
             </div>
             ${r.snippet ? `<div style="font-size:12px;line-height:1.7;color:oklch(0.48 0.02 280);word-break:break-word">${hlt(r.snippet, term)}</div>` : ''}
-          </button>`).join('')}
+          </button>`).join('')}</div>
       </div>`).join('')}
   </div>`;
 }
@@ -173,10 +173,11 @@ function renderApp(vals) {
   const searching = q.trim().length > 0;
   return `
   <div data-header style="position:sticky;top:0;z-index:30;background:oklch(0.975 0.012 85 / 0.93);backdrop-filter:blur(12px);border-bottom:2px solid oklch(0.90 0.02 85)">
-    <div style="max-width:520px;margin:0 auto;padding:10px 14px 9px;display:flex;flex-direction:column;gap:9px">
+    <div class="sc-wrap" style="padding:10px 14px 9px;display:flex;flex-direction:column;gap:9px">
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;background:${vals.col};color:#fff;padding:4px 8px;border-radius:7px">CHEAT</span>
         <span style="font-size:15px;font-weight:900;letter-spacing:.01em">プログラミング用語カンペ</span>
+        <button data-role="toggleWide" class="sc-active-btn" style="margin-left:auto;flex:0 0 auto;font-family:'Zen Maru Gothic',sans-serif;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;cursor:pointer;border:2px solid ${state.wide ? vals.col : 'oklch(0.88 0.02 85)'};background:${state.wide ? vals.col : '#fff'};color:${state.wide ? '#fff' : 'oklch(0.40 0.02 280)'};transition:transform .15s ease">${state.wide ? '▦ ワイド' : '▯ スマホ'}</button>
       </div>
 
       <div style="display:flex;align-items:center;gap:8px;background:#fff;border:2px solid ${searching ? vals.col : 'oklch(0.90 0.02 85)'};border-radius:999px;padding:0 12px;transition:border-color .2s ease">
@@ -187,13 +188,13 @@ function renderApp(vals) {
         <button data-role="clearSearch" class="sc-active-btn" style="flex:0 0 auto;display:${searching ? 'flex' : 'none'};align-items:center;justify-content:center;width:20px;height:20px;border:0;border-radius:50%;background:oklch(0.90 0.02 85);color:oklch(0.40 0.02 280);font-size:12px;cursor:pointer;padding:0">✕</button>
       </div>
 
-      <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:1px">
+      <div class="sc-tabs" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:1px">
         ${vals.tabs.map((t, i) => `<button data-tab-index="${i}" class="sc-active-btn" style="flex:0 0 auto;font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:999px;cursor:pointer;border:2px solid ${t.bd};background:${t.bg};color:${t.fg};transition:transform .15s ease">${esc(t.label)}</button>`).join('')}
       </div>
     </div>
   </div>
 
-  <div style="max-width:520px;margin:0 auto;padding:0 14px">
+  <div class="sc-wrap" style="padding:0 14px">
 
     <div data-results style="display:${searching ? 'block' : 'none'}">${searching ? renderResults(searchSections(q), q.trim()) : ''}</div>
 
@@ -211,7 +212,7 @@ function renderApp(vals) {
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:10px;padding-top:14px">
+      <div class="sc-sections" style="padding-top:14px">
         ${vals.sections.map(s => renderSection(s, vals.col, vals.soft, state.hl)).join('')}
       </div>
 
@@ -249,6 +250,7 @@ function initApp(rootEl) {
 
   function doRender() {
     currentVals = renderVals();
+    rootEl.setAttribute('data-wide', state.wide ? '1' : '0');
     rootEl.innerHTML = renderApp(currentVals);
     if (state.scrollKey) {
       const key = state.scrollKey;
@@ -321,6 +323,13 @@ function initApp(rootEl) {
       return;
     }
 
+    if (e.target.closest('[data-role="toggleWide"]')) {
+      state.wideManual = true;
+      try { localStorage.setItem('cheat-wide', state.wide ? '0' : '1'); } catch (err) {}
+      setState({ wide: !state.wide });
+      return;
+    }
+
     const tabBtn = e.target.closest('[data-tab-index]');
     if (tabBtn) {
       state.hl = '';
@@ -341,6 +350,28 @@ function initApp(rootEl) {
       else if (roleBtn.dataset.role === 'closeAll') currentVals.closeAllFn();
       else if (roleBtn.dataset.role === 'toTop') currentVals.toTop();
     }
+  });
+
+  // 初期表示：保存された選択があればそれを、なければ画面幅で判断する
+  const WIDE_MIN = 1100;
+  let saved = null;
+  try { saved = localStorage.getItem('cheat-wide'); } catch (err) {}
+  if (saved === '1' || saved === '0') {
+    state.wide = saved === '1';
+    state.wideManual = true;
+  } else {
+    state.wide = window.innerWidth >= WIDE_MIN;
+  }
+
+  // 手動で切り替えるまでは、画面幅の変化に追従する
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    if (state.wideManual) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const shouldBeWide = window.innerWidth >= WIDE_MIN;
+      if (shouldBeWide !== state.wide) setState({ wide: shouldBeWide });
+    }, 150);
   });
 
   onStateChange(doRender);

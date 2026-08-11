@@ -29,6 +29,55 @@ a:hover {
   padding-bottom: 80px;
 }
 
+/* ---- 表示幅（スマホ既定 / ワイド） ---- */
+.sc-wrap {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.sc-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sc-rgrid {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* ワイド表示：段組みで縦横に敷き詰める */
+#app[data-wide="1"] .sc-wrap {
+  max-width: 1840px;
+}
+
+#app[data-wide="1"] .sc-sections,
+#app[data-wide="1"] .sc-rgrid {
+  display: block;
+  columns: 340px;
+  column-gap: 12px;
+}
+
+#app[data-wide="1"] .sc-sections > *,
+#app[data-wide="1"] .sc-rgrid > * {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin: 0 0 12px;
+  width: 100%;
+  vertical-align: top;
+}
+
+#app[data-wide="1"] .sc-sections > section {
+  display: inline-block;
+}
+
+#app[data-wide="1"] .sc-tabs {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
 .sc-active-btn:active {
   transform: scale(0.94);
 }

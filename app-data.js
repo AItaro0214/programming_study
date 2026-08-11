@@ -12,7 +12,7 @@ const STEPS = (items) => ({ steps2: 1, items: items.map((r, i) => ({ i: String(i
 const PAIRS = (items) => ({ pairs: 1, items: items.map(r => ({ a: r[0], b: r[1] })) });
 const GLOSS = (items) => ({ gloss: 1, items: items.map(r => ({ w: r[0], m: r[1] })) });
 
-let state = { chap: null, open: {}, q: '', hl: '', scrollKey: null };
+let state = { chap: null, open: {}, q: '', hl: '', scrollKey: null, wide: false, wideManual: false };
 let startChapter = '1';
 let listeners = [];
 function setState(update) {
@@ -24,11 +24,12 @@ function onStateChange(fn) { listeners.push(fn); }
 
 function isOpen(k) {
   const v = state.open[k];
-  return v === undefined ? false : v;
+  // ワイド表示では、明示的に閉じたもの以外は開いた状態で敷き詰める
+  return v === undefined ? !!state.wide : v;
 }
 
 function chapters() {
-  return [c1(), c2(), c3(), c4(), c5(), c6(), c7(), c8(), c9()];
+  return [c1(), c2(), c3(), c4(), c5(), c6(), c7(), c8(), c9(), c10(), c11(), c12()];
 }
 
 function renderVals() {
