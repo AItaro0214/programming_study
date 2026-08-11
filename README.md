@@ -1,6 +1,6 @@
 # programming_study
 
-スマホで読みやすいプログラミング用語カンペ。全14章・138セクションを、一語ずつ意味付きでまとめたチートシートです。
+スマホで読みやすいプログラミング用語カンペ。全14章・145セクションを、一語ずつ意味付きでまとめたチートシートです。
 
 Java / JavaScript / TypeScript / Python / Dart(Flutter) / Swift / Kotlin / C / C++ / SQL・NoSQL、および各言語の主要フレームワーク(React・Next.js / Flask・Django・FastAPI / Spring Boot・Quarkus・Micronaut)を扱っています。
 
