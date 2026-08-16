@@ -1,6 +1,6 @@
 # programming_study
 
-スマホで読みやすいプログラミング用語カンペ。全14章・145セクションを、一語ずつ意味付きでまとめたチートシートです。
+スマホで読みやすいプログラミング用語カンペ。全15章・158セクションを、一語ずつ意味付きでまとめたチートシートです。
 
 Java / JavaScript / TypeScript / Python / Dart(Flutter) / Swift / Kotlin / C / C++ / SQL・NoSQL、および各言語の主要フレームワーク(React・Next.js / Flask・Django・FastAPI / Spring Boot・Quarkus・Micronaut)を扱っています。
 
@@ -21,6 +21,7 @@ Java / JavaScript / TypeScript / Python / Dart(Flutter) / Swift / Kotlin / C / C
 - `app-chapters.js` — 章の組み替え(概念章の①と、言語別の Java / JavaScript・Node.js / Python を素材から構成)
 - `app-langs.js` — TypeScript / モバイル3種 / C・C++ / 依存とパッケージ / 基本文法早見
 - `app-frameworks.js` — React・Next.js / Flask・Django・FastAPI / Spring・Quarkus
+- `app-agents.js` — AIエージェント(ハーネス / ツール / MCP / Skills / AGENTS.md / ベクトルストア)。2026年8月時点の情報
 - `app-search.js` — 全文検索インデックス
 - `app-render.js` — レンダリングと操作(タブ切り替え・アコーディオン・検索ジャンプ・表示幅切り替え)
 

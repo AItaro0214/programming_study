@@ -51,7 +51,8 @@ function chapters() {
     c10(),          // ⑪ React / Next.js
     c11(),          // ⑫ Flask / Django / FastAPI
     c12(),          // ⑬ Spring / Quarkus
-    c4()            // ⑭ SQL / NoSQL
+    c4(),           // ⑭ SQL / NoSQL
+    c15()           // ⑮ AIエージェント
   ];
 }
 
